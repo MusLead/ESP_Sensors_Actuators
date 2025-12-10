@@ -33,11 +33,11 @@ This repository is intentionally framework-agnostic and structured to be added a
 
 ## Adding as a submodule
 
-From the root of the Smart-Home-Ventilation repository, add this repository as a submodule:
-
-git submodule add https://github.com/MusLead/ESP_Sensors_Actuators.git libs/ESP_Sensors_Actuators
+From the root of the [Smart-Home-Ventilation](https://github.com/MusLead/Smart-Home-Ventilation) repository, add this repository as a submodule:
+```sh
+git submodule add https://github.com/MusLead/ESP_Sensors_Actuators.git ESP_Sensors_Actuators
 git submodule update --init --recursive
-
+```
 Notes:
 - The path `libs/ESP_Sensors_Actuators` is only a suggested location. Adjust the path in your project if you prefer `components/`, `lib/`, or another layout.
 - After cloning Smart-Home-Ventilation, use `git submodule update --init --recursive` to fetch this submodule.
