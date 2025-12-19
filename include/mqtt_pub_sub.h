@@ -1,6 +1,7 @@
 #pragma once
 
 // MQTT BROKER ADDRESS
+// TODO: Replace with your ESP32 IP address
 #define MQTT_ADDR_URL "mqtt://10.249.73.216:1883"
 
 void mqtt_pubsub_start(void);
