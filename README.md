@@ -42,3 +42,34 @@ Notes:
 - The path `libs/ESP_Sensors_Actuators` is only a suggested location. Adjust the path in your project if you prefer `components/`, `lib/`, or another layout.
 - After cloning Smart-Home-Ventilation, use `git submodule update --init --recursive` to fetch this submodule.
 
+## Quick Setup
+
+### 1 Create WiFi credentials
+
+Create a file named **`secret.ini`** in each project directory folder `config\` with the following content:
+
+```
+[wifi]
+ssid = XXXX
+password = XXXX
+```
+
+> ! Replace `XXXX` with your WiFi credentials.
+
+### 2 Set MQTT Broker address
+
+Open **`mqtt_pub_sub.h`** and set the IP address of your MQTT broker:
+
+```c
+#define MQTT_ADDR_URL "mqtt://192.168.X.X"
+```
+
+### 3 Startup order
+
+! **Web server, sensors, and actuators must only be used after the following message appears in the monitor:**
+
+```
+MQTT Connected
+```
+
+Only after this message the system is fully operational.
