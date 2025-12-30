@@ -1,8 +1,8 @@
 #pragma once
 
 // MQTT BROKER ADDRESS
-// TODO: Change to your MQTT Broker IP Address
-#define MQTT_ADDR_URL "mqtt://10.249.73.216:1883"
+// Adjust the IP address as per your MQTT broker location
+#define MQTT_ADDR_URL "mqtt://192.168.0.220:1883"
 
 void mqtt_pubsub_start(void);
 void mqtt_publish(const char *topic, const char *msg, int qos);
