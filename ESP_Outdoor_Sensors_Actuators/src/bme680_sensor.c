@@ -82,11 +82,7 @@ void bme680_read_task(void *pvParameters)
             mqtt_publish("ESP32/outdoor", msg, 1); // Publish sensor data
         }
 
-        vTaskDelayUntil(&last_wake_time, 10); // macht eine absolute Verzögerung --> Zyklen bleiben stabil und präzise.
-
-        // Unterschied zu vTaskDelay(10000 / portTICK_PERIOD_MS)
-        // vTaskDelay() macht eine relative Verzögerung:
-        // War die Task zu langsam, verschiebt sich der Zyklus.
+        vTaskDelayUntil(&last_wake_time, 10); // 10 milisec
     }
 
     //
