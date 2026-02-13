@@ -79,7 +79,7 @@ void bme680_read_task(void *pvParameters)
                      sensor_data.relative_humidity,
                      sensor_data.iaq_score);
 
-            mqtt_publish("ESP32/indoor", msg, 1); // change this to "ESP32/outdoor" later
+            mqtt_publish("ESP32/indoor", msg, 1); // publish data
         }
 
         vTaskDelayUntil(&last_wake_time, 10); // 10 milisec
