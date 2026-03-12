@@ -1,8 +1,7 @@
 #include "mqtt_pub_sub.h"
 #include "esp_log.h"
 #include "mqtt_client.h"
-#include "servo_window_sensor.h"
-#include "absorber.h"
+#include "servo_controller.h"
 
 static const char *TAG = "MQTT_PUBSUB";
 
@@ -18,7 +17,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     case MQTT_EVENT_CONNECTED:
         ESP_LOGI(TAG, "Connected to MQTT Broker");
         mqtt_subscribe("ESP32/window", 1);
-        mqtt_subscribe("ESP32/absorber", 1);
+        mqtt_subscribe("ESP32/door", 1);
 
         break;
     case MQTT_EVENT_DISCONNECTED:
@@ -48,9 +47,9 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
         {
             window_state = (payload[0] == '1');
         }
-        else if (strcmp(topic, "ESP32/absorber") == 0)
+        else if (strcmp(topic, "ESP32/door") == 0)
         {
-            absorber_state = (payload[0] == '1');
+            door_indoor_state = (payload[0] == '1'); // replaces absorber_state
         }
         break;
     case MQTT_EVENT_ERROR:

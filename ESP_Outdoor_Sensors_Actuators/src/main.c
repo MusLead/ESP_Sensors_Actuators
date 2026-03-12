@@ -13,7 +13,7 @@
 #include "anemometer.h"
 
 #include "relay_switch.h"
-#include "servo_door_sensor.h"
+#include "absorber.h"
 
 static const char *TAG = "OUTDOOR_MAIN";
 
@@ -43,9 +43,6 @@ void app_main(void)
     // 6 SENSORS INIT
     ESP_ERROR_CHECK(bme680_sensor_init());
 
-    // SERVO INIT
-    ESP_ERROR_CHECK(servo_init());
-
     //
     // 7 At the end create a task from the sensor
     // BME680 TASK
@@ -54,8 +51,8 @@ void app_main(void)
     xTaskCreate(anemometer_task, "outdoor_anemometer_task", 3072, NULL, 4, NULL);
     // RELAY SWITCH TASK
     xTaskCreate(relay_start_task, "outdoor_relay_task", 2048, NULL, 2, NULL);
-    // SERVO TASK
-    xTaskCreate(servo_start_task, "outdoor_servo_door_task", 2048, NULL, 2, NULL);
+    // ABSORBER TASK
+    xTaskCreate(absorber_task, "outdoor_absorber_task", 2048, NULL, 2, NULL);
 
     ESP_LOGI(TAG, "System initialized successfully");
 }

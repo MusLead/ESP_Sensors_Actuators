@@ -2,7 +2,7 @@
 #include "esp_log.h"
 #include "mqtt_client.h"
 #include "relay_switch.h"
-#include "servo_door_sensor.h"
+#include "absorber.h"
 
 static const char *TAG = "MQTT_PUBSUB";
 
@@ -18,7 +18,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     case MQTT_EVENT_CONNECTED:
         ESP_LOGI(TAG, "Connected to MQTT Broker");
         mqtt_subscribe("ESP32/fan", 1);
-        mqtt_subscribe("ESP32/door", 1);
+        mqtt_subscribe("ESP32/absorber", 1);
 
         break;
     case MQTT_EVENT_DISCONNECTED:
@@ -48,9 +48,9 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
         {
             fan_state = (payload[0] == '1');
         }
-        else if (strcmp(topic, "ESP32/door") == 0)
+        else if (strcmp(topic, "ESP32/absorber") == 0)
         {
-            door_state = (payload[0] == '1');
+            absorber_state = (payload[0] == '1');
         }
 
         break;

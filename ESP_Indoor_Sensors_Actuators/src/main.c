@@ -11,8 +11,7 @@
 #include "i2c_bus.h"
 #include "bme680_sensor.h"
 
-#include "servo_window_sensor.h"
-#include "absorber.h"
+#include "servo_controller.h"
 
 static const char *TAG = "INDOOR_MAIN";
 
@@ -42,7 +41,7 @@ void app_main(void)
     // 6 SENSORS INIT
     ESP_ERROR_CHECK(bme680_sensor_init());
 
-    // SERVO INIT
+    // SERVOS INIT
     ESP_ERROR_CHECK(servo_init());
 
     //
@@ -50,9 +49,7 @@ void app_main(void)
     // BME680 TASK
     xTaskCreate(bme680_read_task, "indoor_bme680_task", 4096, NULL, 3, NULL);
     // SERVO TASK
-    xTaskCreate(servo_start_task, "indoor_servo_window_task", 2048, NULL, 2, NULL);
-    // ABSORBER TASK
-    xTaskCreate(absorber_task, "indoor_absorber_task", 2048, NULL, 2, NULL);
+    xTaskCreate(servo_start_task, "indoor_servo_task", 2048, NULL, 2, NULL);
 
     ESP_LOGI(TAG, "Indoor system initialized successfully");
 }
